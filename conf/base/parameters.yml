@@ -1,0 +1,10 @@
+feature_engineering:
+  rename_columns:
+    season: season
+    hr: hour
+    weekday: week_day
+    weathersit: weather
+    temp: temperature
+    hum: humidity
+    windspeed: wind_speed
+    cnt: bike_count
