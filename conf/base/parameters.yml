@@ -8,3 +8,15 @@ feature_engineering:
     hum: humidity
     windspeed: wind_speed
     cnt: bike_count
+
+  lag_params:
+    bike_count: [1, 2, 22, 23]
+    hour: [1, 2, 3]
+    temperature: [1, 2, 3]
+    humidity: [1, 2, 3]
+
+training:
+  target_params:
+    shift_period: 1
+    target_column: bike_count
+    new_target_name: target
