@@ -1,5 +1,5 @@
 from kedro.pipeline import Pipeline, node
-from .nodes import rename_columns
+from .nodes import rename_columns, get_features
 
 def create_feature_eng_pipeline() -> Pipeline:
     return Pipeline(
@@ -8,6 +8,11 @@ def create_feature_eng_pipeline() -> Pipeline:
                 func=rename_columns,
                 inputs=["train_data", "params:feature_engineering.rename_columns"],
                 outputs="renamed_data"
+            ),
+            node(
+                func=get_features,
+                inputs=["renamed_data", "params:feature_engineering.lag_params"],
+                outputs=["features", "timestamps"]
             )
         ]
     )
