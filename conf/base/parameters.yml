@@ -20,3 +20,5 @@ training:
     shift_period: 1
     target_column: bike_count
     new_target_name: target
+
+  train_fraction: 0.8

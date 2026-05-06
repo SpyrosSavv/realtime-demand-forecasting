@@ -37,3 +37,19 @@ def make_target(df: pd.DataFrame, target_params: Dict[str, Any]) -> pd.DataFrame
         df[target_params["target_column"]].shift(-target_params["shift_period"]).ffill()
     )
     return df
+
+def split_data(
+    df: pd.DataFrame, 
+    params: Dict[str, Any]
+) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+    """Split data into train/test sets."""
+    # Get target column name
+    target_name = params["target_params"]["new_target_name"]
+    # Get features columns names
+    features = [col for col in df.columns if col != target_name]
+    # Split data into train/test sets
+    x, y = df[features], df[target_name]
+    train_size = int(params["train_fraction"] * len(df))
+    x_train, x_test = x[:train_size], x[train_size:]
+    y_train, y_test = y[:train_size], y[train_size:]
+    return x_train, x_test, y_train, y_test
